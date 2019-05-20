@@ -27,6 +27,7 @@ def get_vultr():
     return Vultr(API_KEY)
 
 
+# https://www.vultr.com/api/#server_create
 def create():
     vultr = get_vultr()
     dcid = 22        # idc中心

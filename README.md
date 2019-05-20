@@ -21,4 +21,4 @@ python tool.py dump
 
 ## dep
 
-vultr refer from https://github.com/spry-group/python-vultr
+vultr module refer from https://github.com/spry-group/python-vultr
