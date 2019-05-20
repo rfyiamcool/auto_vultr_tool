@@ -3,7 +3,8 @@
 
 
 import logging
-import sys
+import socket
+import sys,os
 from os import environ
 from json import dumps
 
@@ -44,6 +45,12 @@ def show_server_list():
     server_list = vultr.server.list()
     for server_id in server_list:
         print serverID
+
+
+def add_ssh_key():
+    vultr = get_vultr()
+    sk = open("~/.ssh/id_rsa.pub").read()
+    vultr.sshkey.create(socket.gethostname(), sk)
 
 
 def destroy():
@@ -119,6 +126,8 @@ if __name__ == "__main__":
         dump_info()
     elif cmd == "create":
         create()
+    elif cmd == "add_ssh_key":
+        add_ssh_key()
     elif cmd == "destroy":
         destroy()
     else:
