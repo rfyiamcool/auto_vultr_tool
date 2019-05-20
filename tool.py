@@ -1,6 +1,5 @@
-# coding:utf-8
-#!/usr/bin/env python
-
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import logging
 import socket
@@ -21,9 +20,10 @@ logging.getLogger("requests").setLevel(logging.WARNING)
 
 
 def get_vultr():
-    if API_KEY == "":
+    print API_KEY
+    if API_KEY == "" or API_KEY is None:
         print "not found key"
-        sys.exit()
+        sys.exit(99)
 
     return Vultr(API_KEY)
 
@@ -54,7 +54,7 @@ def add_ssh_key():
 
 
 def destroy():
-    vultr = Vultr(API_KEY)
+    vultr = get_vultr()
     try:
         server_list = vultr.server.list()
     except VultrError as ex:
@@ -67,7 +67,7 @@ def destroy():
 
 
 def dump_info():
-    vultr = Vultr(API_KEY)
+    vultr = get_vultr()
 
     try:
         logging.info('Listing backups:\n%s', dumps(
@@ -121,6 +121,7 @@ if __name__ == "__main__":
         cmd = sys.argv[1]
     else:
         print "input args"
+        sys.exit(99)
 
     if cmd == "dump":
         dump_info()
